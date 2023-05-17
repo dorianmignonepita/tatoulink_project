@@ -21,5 +21,11 @@ public partial class User
 
     public string? LastJobs { get; set; }
 
+    public virtual ICollection<JobOfferUser> JobOfferUsers { get; set; } = new List<JobOfferUser>();
+
     public virtual ICollection<JobOffer> JobOffers { get; set; } = new List<JobOffer>();
+
+    public virtual ICollection<Notification> NotificationReceivers { get; set; } = new List<Notification>();
+
+    public virtual ICollection<Notification> NotificationSenders { get; set; } = new List<Notification>();
 }

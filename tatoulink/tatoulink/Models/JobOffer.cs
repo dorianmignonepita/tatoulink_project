@@ -22,4 +22,6 @@ public partial class JobOffer
     public int CreatorId { get; set; }
 
     public virtual User Creator { get; set; } = null!;
+
+    public virtual ICollection<JobOfferUser> JobOfferUsers { get; set; } = new List<JobOfferUser>();
 }
