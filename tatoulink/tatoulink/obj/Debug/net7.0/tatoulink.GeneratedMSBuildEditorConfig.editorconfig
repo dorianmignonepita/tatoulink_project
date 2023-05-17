@@ -24,6 +24,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/JobOfferDTOes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iT2ZmZXJEVE9lc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/JobOfferDTOes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iT2ZmZXJEVE9lc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/JobOfferDTOes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iT2ZmZXJEVE9lc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/JobOfferDTOes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iT2ZmZXJEVE9lc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/JobOfferDTOes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iT2ZmZXJEVE9lc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/JobOffers/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iT2ZmZXJzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -44,6 +64,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iT2ZmZXJzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/JobOfferUserDTOes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iT2ZmZXJVc2VyRFRPZXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/JobOfferUserDTOes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iT2ZmZXJVc2VyRFRPZXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/JobOfferUserDTOes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iT2ZmZXJVc2VyRFRPZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/JobOfferUserDTOes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iT2ZmZXJVc2VyRFRPZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/JobOfferUserDTOes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iT2ZmZXJVc2VyRFRPZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/JobOfferUsers/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iT2ZmZXJVc2Vyc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -62,6 +102,26 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/JobOfferUsers/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iT2ZmZXJVc2Vyc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/NotificationDTOes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uRFRPZXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/NotificationDTOes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uRFRPZXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/NotificationDTOes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uRFRPZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/NotificationDTOes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uRFRPZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/NotificationDTOes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uRFRPZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/Notifications/Create.cshtml]
@@ -90,6 +150,26 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/UserDTOes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlckRUT2VzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/UserDTOes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlckRUT2VzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/UserDTOes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlckRUT2VzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/UserDTOes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlckRUT2VzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/UserDTOes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlckRUT2VzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/dorim/Documents/MTI_EPITA/environnement_dotnet_c\#/tatoulink_project/tatoulink/tatoulink/Views/Users/Create.cshtml]

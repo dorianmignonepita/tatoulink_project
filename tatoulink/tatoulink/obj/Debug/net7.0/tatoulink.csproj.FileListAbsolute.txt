@@ -580,3 +580,4 @@ C:\Users\dorim\Documents\MTI_EPITA\environnement_dotnet_c#\tatoulink_project\tat
 C:\Users\dorim\Documents\MTI_EPITA\environnement_dotnet_c#\tatoulink_project\tatoulink\tatoulink\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
 C:\Users\dorim\Documents\MTI_EPITA\environnement_dotnet_c#\tatoulink_project\tatoulink\tatoulink\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
 C:\Users\dorim\Documents\MTI_EPITA\environnement_dotnet_c#\tatoulink_project\tatoulink\tatoulink\obj\Debug\net7.0\tatoulink.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\dorim\Documents\MTI_EPITA\environnement_dotnet_c#\tatoulink_project\tatoulink\tatoulink\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

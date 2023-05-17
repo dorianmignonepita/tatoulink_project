@@ -1,100 +1,102 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing.Printing;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using tatoulink.DTO;
 using tatoulink.Models;
 
 namespace tatoulink.Controllers
 {
-    public class JobOffersController : Controller
+    public class NotificationDTOesController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public JobOffersController(AppDbContext context)
+        public NotificationDTOesController(AppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        // GET: JobOffers
+        // GET: NotificationDTOes
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.JobOffers.Include(j => j.Creator);
-            return View(await appDbContext.ToListAsync());
+            var notificationDTOs = await _context.NotificationDTO.ToListAsync();
+            var notifications = _mapper.Map<List<Notification>>(notificationDTOs);
+            return View(notifications);
         }
 
-        // GET: JobOffers/Details/5
+        // GET: NotificationDTOes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.JobOffers == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var jobOffer = await _context.JobOffers
-                .Include(j => j.Creator)
+            var notificationDTO = await _context.NotificationDTO
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (jobOffer == null)
+            if (notificationDTO == null)
             {
                 return NotFound();
             }
 
-            return View(jobOffer);
+            var notification = _mapper.Map<Notification>(notificationDTO);
+            return View(notification);
         }
 
-        // GET: JobOffers/Create
+        // GET: NotificationDTOes/Create
         public IActionResult Create()
         {
-            ViewData["CreatorId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
-        // POST: JobOffers/Create
+        // POST: NotificationDTOes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OfferName,Description,CreationDate,Type,Duration,ExpiringDate,CreatorId")] JobOffer jobOffer)
+        public async Task<IActionResult> Create([Bind("Id,SenderId,ReceiverId,JobOfferUserId,Message,Timestamp")] NotificationDTO notificationDTO)
         {
-
             if (ModelState.IsValid)
             {
-                _context.Add(jobOffer);
+                var notification = _mapper.Map<Notification>(notificationDTO);
+                _context.Add(notification);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CreatorId"] = new SelectList(_context.Users, "Id", "Id", jobOffer.CreatorId);
-            return View(jobOffer);
+            return View(notificationDTO);
         }
 
-        // GET: JobOffers/Edit/5
+        // GET: NotificationDTOes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.JobOffers == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var jobOffer = await _context.JobOffers.FindAsync(id);
-            if (jobOffer == null)
+            var notificationDTO = await _context.NotificationDTO.FindAsync(id);
+            if (notificationDTO == null)
             {
                 return NotFound();
             }
-            ViewData["CreatorId"] = new SelectList(_context.Users, "Id", "Id", jobOffer.CreatorId);
-            return View(jobOffer);
+            var notification = _mapper.Map<Notification>(notificationDTO);
+            return View(notification);
         }
 
-        // POST: JobOffers/Edit/5
+        // POST: NotificationDTOes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OfferName,Description,CreationDate,Type,Duration,ExpiringDate,CreatorId")] JobOffer jobOffer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,SenderId,ReceiverId,JobOfferUserId,Message,Timestamp")] NotificationDTO notificationDTO)
         {
-            if (id != jobOffer.Id)
+            if (id != notificationDTO.Id)
             {
                 return NotFound();
             }
@@ -103,12 +105,13 @@ namespace tatoulink.Controllers
             {
                 try
                 {
-                    _context.Update(jobOffer);
+                    var notification = _mapper.Map<Notification>(notificationDTO);
+                    _context.Update(notification);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!JobOfferExists(jobOffer.Id))
+                    if (!NotificationDTOExists(notificationDTO.Id))
                     {
                         return NotFound();
                     }
@@ -119,51 +122,47 @@ namespace tatoulink.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CreatorId"] = new SelectList(_context.Users, "Id", "Id", jobOffer.CreatorId);
-            return View(jobOffer);
+            return View(notificationDTO);
         }
 
-        // GET: JobOffers/Delete/5
+        // GET: NotificationDTOes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.JobOffers == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var jobOffer = await _context.JobOffers
-                .Include(j => j.Creator)
+            var notificationDTO = await _context.NotificationDTO
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (jobOffer == null)
+            if (notificationDTO == null)
             {
                 return NotFound();
             }
 
-            return View(jobOffer);
+            var notification = _mapper.Map<Notification>(notificationDTO);
+            return View(notification);
         }
 
-        // POST: JobOffers/Delete/5
+        // POST: NotificationDTOes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.JobOffers == null)
+            var notificationDTO = await _context.NotificationDTO.FindAsync(id);
+            if (notificationDTO != null)
             {
-                return Problem("Entity set 'AppDbContext.JobOffers'  is null.");
+                _context.NotificationDTO.Remove(notificationDTO);
             }
-            var jobOffer = await _context.JobOffers.FindAsync(id);
-            if (jobOffer != null)
-            {
-                _context.JobOffers.Remove(jobOffer);
-            }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool JobOfferExists(int id)
+        private bool NotificationDTOExists(int id)
         {
-          return (_context.JobOffers?.Any(e => e.Id == id)).GetValueOrDefault();
+            return _context.NotificationDTO.Any(e => e.Id == id);
         }
     }
 }
+

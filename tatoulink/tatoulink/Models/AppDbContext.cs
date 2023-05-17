@@ -156,4 +156,10 @@ public partial class AppDbContext : DbContext
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
     public DbSet<tatoulink.DTO.JobOfferDTO> JobOfferDTO { get; set; } = default!;
+
+    public DbSet<tatoulink.DTO.JobOfferUserDTO> JobOfferUserDTO { get; set; } = default!;
+
+    public DbSet<tatoulink.DTO.UserDTO> UserDTO { get; set; } = default!;
+
+    public DbSet<tatoulink.DTO.NotificationDTO> NotificationDTO { get; set; } = default!;
 }

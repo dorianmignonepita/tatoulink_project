@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.ComponentModel.DataAnnotations;
 namespace tatoulink.Models;
 
 public partial class Notification
@@ -13,13 +13,18 @@ public partial class Notification
 
     public int JobOfferUserId { get; set; }
 
-    public string Message { get; set; } = null!;
+    [Required(ErrorMessage = "Le champ Message est requis.")]
+    public string Message { get; set; }
 
+    [Required(ErrorMessage = "Le champ Timestamp est requis.")]
     public DateTime Timestamp { get; set; }
 
-    public virtual JobOfferUser JobOfferUser { get; set; } = null!;
+    [Required(ErrorMessage = "Le champ JobOfferUser est requis.")]
+    public virtual JobOfferUser JobOfferUser { get; set; }
 
-    public virtual User Receiver { get; set; } = null!;
+    [Required(ErrorMessage = "Le champ Receiver est requis.")]
+    public virtual User Receiver { get; set; }
 
-    public virtual User Sender { get; set; } = null!;
+    [Required(ErrorMessage = "Le champ Sender est requis.")]
+    public virtual User Sender { get; set; }
 }
