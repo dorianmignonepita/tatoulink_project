@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using tatoulink.DTO;
 
 namespace tatoulink.Models;
 
@@ -24,7 +25,7 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Name=ConnectionStrings:DefaultConnection");
+        => optionsBuilder.UseSqlServer("Server=AOSE\\MTI;Database=TATOULINK;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -153,4 +154,6 @@ public partial class AppDbContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+    public DbSet<tatoulink.DTO.JobOfferDTO> JobOfferDTO { get; set; } = default!;
 }

@@ -18645,6 +18645,11 @@
   "RootNamespace": "tatoulink",
   "Documents": [
     {
+      "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\Notifications\\Delete.cshtml",
+      "TargetPath": "Views\\Notifications\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\_ViewStart.cshtml",
       "TargetPath": "Views\\_ViewStart.cshtml",
       "FileKind": "mvc"
@@ -18655,8 +18660,28 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\JobOfferUsers\\Details.cshtml",
+      "TargetPath": "Views\\JobOfferUsers\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\Notifications\\Index.cshtml",
+      "TargetPath": "Views\\Notifications\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\Users\\Index.cshtml",
+      "TargetPath": "Views\\Users\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\Shared\\Error.cshtml",
       "TargetPath": "Views\\Shared\\Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\JobOffers\\Index.cshtml",
+      "TargetPath": "Views\\JobOffers\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -18665,8 +18690,33 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\Notifications\\Details.cshtml",
+      "TargetPath": "Views\\Notifications\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\Users\\Edit.cshtml",
+      "TargetPath": "Views\\Users\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\JobOffers\\Details.cshtml",
+      "TargetPath": "Views\\JobOffers\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\Users\\Delete.cshtml",
+      "TargetPath": "Views\\Users\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\JobOffers\\Edit.cshtml",
+      "TargetPath": "Views\\JobOffers\\Edit.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -18675,8 +18725,58 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\JobOfferUsers\\Edit.cshtml",
+      "TargetPath": "Views\\JobOfferUsers\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\Home\\Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\Notifications\\Edit.cshtml",
+      "TargetPath": "Views\\Notifications\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\JobOfferUsers\\Index.cshtml",
+      "TargetPath": "Views\\JobOfferUsers\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\Notifications\\Create.cshtml",
+      "TargetPath": "Views\\Notifications\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\JobOfferUsers\\Create.cshtml",
+      "TargetPath": "Views\\JobOfferUsers\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\JobOffers\\Create.cshtml",
+      "TargetPath": "Views\\JobOffers\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\Users\\Details.cshtml",
+      "TargetPath": "Views\\Users\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\Users\\Create.cshtml",
+      "TargetPath": "Views\\Users\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\JobOffers\\Delete.cshtml",
+      "TargetPath": "Views\\JobOffers\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\Views\\JobOfferUsers\\Delete.cshtml",
+      "TargetPath": "Views\\JobOfferUsers\\Delete.cshtml",
       "FileKind": "mvc"
     }
   ],
