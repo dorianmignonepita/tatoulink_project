@@ -1,22 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace tatoulink.Models;
+namespace tatoulink.DataAccess.EfModels;
 
 public partial class User
 {
     public int Id { get; set; }
 
+    [Required(ErrorMessage = "Le champ Firstname est requis.")]
     public string Firstname { get; set; } = null!;
 
+    [Required(ErrorMessage = "Le champ Surname est requis.")]
     public string Surname { get; set; } = null!;
 
+    [Required(ErrorMessage = "Le champ Birthdate est requis.")]
     public DateTime Birthdate { get; set; }
 
+    [Required(ErrorMessage = "Le champ Password est requis.")]
     public string Password { get; set; } = null!;
 
+    [Required(ErrorMessage = "Le champ Email est requis.")]
     public string Email { get; set; } = null!;
 
+    [Required(ErrorMessage = "Le champ Status est requis.")]
     public int Status { get; set; }
 
     public string? LastJobs { get; set; }

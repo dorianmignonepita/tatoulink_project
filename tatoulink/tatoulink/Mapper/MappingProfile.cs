@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using tatoulink.DTO;
+using tatoulink.Dbo;
 using tatoulink.Models;
 
 public class MappingProfile : Profile
@@ -12,7 +12,7 @@ public class MappingProfile : Profile
         CreateMap<UserDTO, User>();
         CreateMap<JobOfferUser, JobOfferUserDTO>();
         CreateMap<JobOfferUserDTO, JobOfferUser>();
-        CreateMap<Notification, NotificationDTO>();
-        CreateMap<NotificationDTO, Notification>();
+        CreateMap<Notification, Notification>();
+        CreateMap<Notification, Notification>();
     }
 }

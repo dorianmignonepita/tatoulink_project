@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace tatoulink.Models;
+namespace tatoulink.DataAccess.EfModels;
 
 public partial class JobOfferUser
 {

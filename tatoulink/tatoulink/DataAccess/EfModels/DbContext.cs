@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using tatoulink.DTO;
 
-namespace tatoulink.Models;
+namespace tatoulink.DataAccess.EfModels;
 
-public partial class AppDbContext : DbContext
+public partial class DbContext : Microsoft.EntityFrameworkCore.DbContext
 {
-    public AppDbContext()
+    public DbContext()
     {
     }
 
-    public AppDbContext(DbContextOptions<AppDbContext> options)
+    public DbContext(DbContextOptions<DbContext> options)
         : base(options)
     {
     }
@@ -25,13 +24,14 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("name=ConnectionStrings:DefaultConnection");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<JobOffer>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__job_offe__3213E83FB39E3FE1");
+            entity.HasKey(e => e.Id).HasName("PK__job_offe__3213E83F06F62932");
 
             entity.ToTable("job_offer");
 
@@ -60,12 +60,12 @@ public partial class AppDbContext : DbContext
             entity.HasOne(d => d.Creator).WithMany(p => p.JobOffers)
                 .HasForeignKey(d => d.CreatorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__job_offer__creat__5812160E");
+                .HasConstraintName("FK__job_offer__creat__2E1BDC42");
         });
 
         modelBuilder.Entity<JobOfferUser>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__job_offe__3213E83F524892BE");
+            entity.HasKey(e => e.Id).HasName("PK__job_offe__3213E83FD79676E2");
 
             entity.ToTable("job_offer_user");
 
@@ -75,16 +75,16 @@ public partial class AppDbContext : DbContext
 
             entity.HasOne(d => d.JobOffer).WithMany(p => p.JobOfferUsers)
                 .HasForeignKey(d => d.JobOfferId)
-                .HasConstraintName("FK__job_offer__job_o__59063A47");
+                .HasConstraintName("FK__job_offer__job_o__2F10007B");
 
             entity.HasOne(d => d.User).WithMany(p => p.JobOfferUsers)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__job_offer__user___59FA5E80");
+                .HasConstraintName("FK__job_offer__user___300424B4");
         });
 
         modelBuilder.Entity<Notification>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__notifica__3213E83FDC1D1A49");
+            entity.HasKey(e => e.Id).HasName("PK__notifica__3213E83F3FB80001");
 
             entity.ToTable("notification");
 
@@ -103,26 +103,26 @@ public partial class AppDbContext : DbContext
             entity.HasOne(d => d.JobOfferUser).WithMany(p => p.Notifications)
                 .HasForeignKey(d => d.JobOfferUserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__notificat__job_o__571DF1D5");
+                .HasConstraintName("FK__notificat__job_o__2D27B809");
 
             entity.HasOne(d => d.Receiver).WithMany(p => p.NotificationReceivers)
                 .HasForeignKey(d => d.ReceiverId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__notificat__recei__5629CD9C");
+                .HasConstraintName("FK__notificat__recei__2C3393D0");
 
             entity.HasOne(d => d.Sender).WithMany(p => p.NotificationSenders)
                 .HasForeignKey(d => d.SenderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__notificat__sende__5535A963");
+                .HasConstraintName("FK__notificat__sende__2B3F6F97");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__user__3213E83F8B3C4F9D");
+            entity.HasKey(e => e.Id).HasName("PK__user__3213E83F7BA1E321");
 
             entity.ToTable("user");
 
-            entity.HasIndex(e => e.Email, "UQ__user__AB6E616472E53061").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__user__AB6E616430615130").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Birthdate)
@@ -154,12 +154,4 @@ public partial class AppDbContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
-    public DbSet<tatoulink.DTO.JobOfferDTO> JobOfferDTO { get; set; } = default!;
-
-    public DbSet<tatoulink.DTO.JobOfferUserDTO> JobOfferUserDTO { get; set; } = default!;
-
-    public DbSet<tatoulink.DTO.UserDTO> UserDTO { get; set; } = default!;
-
-    public DbSet<tatoulink.DTO.NotificationDTO> NotificationDTO { get; set; } = default!;
 }
