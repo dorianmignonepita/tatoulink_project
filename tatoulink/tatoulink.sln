@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{D94B84E0-F67F-4418-81A9-A98C17674994}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tatoulink", "tatoulink\tatoulink.csproj", "{EE4EBB56-7739-4F0C-873A-AD92F1A5BC8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tatoulink", "tatoulink\tatoulink.csproj", "{EE4EBB56-7739-4F0C-873A-AD92F1A5BC8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
