@@ -6,6 +6,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using tatoulink.DataAccess.Interfaces;
+using tatoulink.DataAccess.Repositories;
 using tatoulink.Dbo;
 using tatoulink.Models;
 
@@ -16,10 +18,17 @@ namespace tatoulink.Controllers
         private readonly DataAccess.EfModels.DbContext _context;
         protected readonly IMapper _mapper;
 
-        public JobOfferUsersController(DataAccess.EfModels.DbContext context, IMapper mapper)
+        private readonly ILogger<JobOfferUserRepository> _logger;
+
+        protected readonly JobOfferUserRepository _jobOfferUserRepository;
+
+        public JobOfferUsersController(DataAccess.EfModels.DbContext context, IMapper mapper, ILogger<JobOfferUserRepository> logger)
         {
             _context = context;
             _mapper = mapper;
+            _logger = logger;
+
+            _jobOfferUserRepository = new JobOfferUserRepository(_context, _logger, _mapper);
         }
 
         // GET: JobOfferUsers
@@ -66,9 +75,8 @@ namespace tatoulink.Controllers
         {
             if (ModelState.IsValid)
             {
-                DataAccess.EfModels.JobOfferUser jobOfferUser = _mapper.Map<DataAccess.EfModels.JobOfferUser>(jobOfferUserDBO);
-                _context.Add(jobOfferUser);
-                await _context.SaveChangesAsync();
+                await _jobOfferUserRepository.Insert(jobOfferUserDBO);
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["JobOfferId"] = new SelectList(_context.JobOffers, "Id", "Id", jobOfferUserDBO.JobOfferId);
@@ -99,24 +107,22 @@ namespace tatoulink.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,JobOfferId,UserId")] Dbo.JobOfferUser jobOfferUserDTO)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,JobOfferId,UserId")] Dbo.JobOfferUser jobOfferUserDBO)
         {
-            if (id != jobOfferUserDTO.Id)
+            if (id != jobOfferUserDBO.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                DataAccess.EfModels.JobOfferUser jobOfferUser = _mapper.Map<DataAccess.EfModels.JobOfferUser>(jobOfferUserDTO);
                 try
                 {
-                    _context.Update(jobOfferUser);
-                    await _context.SaveChangesAsync();
+                    await _jobOfferUserRepository.Update(jobOfferUserDBO);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!JobOfferUserExists(jobOfferUser.Id))
+                    if (!JobOfferUserExists(jobOfferUserDBO.Id))
                     {
                         return NotFound();
                     }
@@ -127,9 +133,9 @@ namespace tatoulink.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["JobOfferId"] = new SelectList(_context.JobOffers, "Id", "Id", jobOfferUserDTO.JobOfferId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", jobOfferUserDTO.UserId);
-            return View(jobOfferUserDTO);
+            ViewData["JobOfferId"] = new SelectList(_context.JobOffers, "Id", "Id", jobOfferUserDBO.JobOfferId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", jobOfferUserDBO.UserId);
+            return View(jobOfferUserDBO);
         }
 
         // GET: JobOfferUsers/Delete/5
@@ -161,13 +167,9 @@ namespace tatoulink.Controllers
             {
                 return Problem("Entity set 'AppDbContext.JobOfferUsers'  is null.");
             }
-            var jobOfferUser = await _context.JobOfferUsers.FindAsync(id);
-            if (jobOfferUser != null)
-            {
-                _context.JobOfferUsers.Remove(jobOfferUser);
-            }
-            
-            await _context.SaveChangesAsync();
+
+            await _jobOfferUserRepository.Delete(id);
+
             return RedirectToAction(nameof(Index));
         }
 

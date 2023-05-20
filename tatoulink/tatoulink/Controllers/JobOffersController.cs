@@ -8,8 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using tatoulink.DataAccess.Repositories;
-using tatoulink.Dbo;
-using tatoulink.Models;
 
 namespace tatoulink.Controllers
 {
@@ -21,7 +19,6 @@ namespace tatoulink.Controllers
         private readonly ILogger<JobOfferRepository> _logger;
 
         protected readonly JobOfferRepository _jobOfferRepository;
-        protected readonly UserRepository _userRepository;
 
         public JobOffersController(DataAccess.EfModels.DbContext context, IMapper mapper, ILogger<JobOfferRepository> logger)
         {
@@ -30,7 +27,6 @@ namespace tatoulink.Controllers
             _logger = logger;
 
             _jobOfferRepository = new JobOfferRepository(_context, _logger, _mapper);
-            _userRepository = new UserRepository(_context, _logger, _mapper);
         }
 
         // GET: JobOffers
@@ -43,10 +39,9 @@ namespace tatoulink.Controllers
             {
                 if (jobOffer.ExpiringDate < DateTime.Now)
                 {
-                    _context.Remove(jobOffer);
+                    await _jobOfferRepository.Delete(jobOffer.Id);
                 }
             }
-            _context.SaveChanges();
 
             var appDbContext = _context.JobOffers.Include(j => j.Creator);
             return View(await appDbContext.ToListAsync());
@@ -89,9 +84,8 @@ namespace tatoulink.Controllers
 
             if (ModelState.IsValid)
             {
-                DataAccess.EfModels.JobOffer jobOffer = _mapper.Map<DataAccess.EfModels.JobOffer>(jobOfferDBO);
-                _context.Add(jobOffer);
-                await _context.SaveChangesAsync();
+                await _jobOfferRepository.Insert(jobOfferDBO);
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -131,11 +125,9 @@ namespace tatoulink.Controllers
 
             if (ModelState.IsValid)
             {
-                DataAccess.EfModels.JobOffer jobOffer = _mapper.Map<DataAccess.EfModels.JobOffer>(jobOfferDBO);
                 try
                 {
-                    _context.Update(jobOffer);
-                    await _context.SaveChangesAsync();
+                    await _jobOfferRepository.Update(jobOfferDBO);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -182,13 +174,9 @@ namespace tatoulink.Controllers
             {
                 return Problem("Entity set 'AppDbContext.JobOffers'  is null.");
             }
-            var jobOffer = await _context.JobOffers.FindAsync(id);
-            if (jobOffer != null)
-            {
-                _context.JobOffers.Remove(jobOffer);
-            }
+
+            await _jobOfferRepository.Delete(id);
             
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

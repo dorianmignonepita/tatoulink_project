@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using tatoulink.DataAccess.Repositories;
 using tatoulink.Dbo;
 using tatoulink.Models;
 
@@ -16,10 +17,18 @@ namespace tatoulink.Controllers
         private readonly DataAccess.EfModels.DbContext _context;
         protected readonly IMapper _mapper;
 
-        public UsersController(DataAccess.EfModels.DbContext context, IMapper mapper)
+        private readonly ILogger<UserRepository> _logger;
+
+        protected readonly UserRepository _userRepository;
+
+        public UsersController(DataAccess.EfModels.DbContext context, IMapper mapper, ILogger<UserRepository> logger)
         {
             _context = context;
             _mapper = mapper;
+
+            _logger = logger;
+
+            _userRepository = new UserRepository(_context, _logger, _mapper);
         }
 
         // GET: Users
@@ -63,9 +72,8 @@ namespace tatoulink.Controllers
         {
             if (ModelState.IsValid)
             {
-                DataAccess.EfModels.User user = _mapper.Map<DataAccess.EfModels.User>(userDBO);
-                _context.Add(user);
-                await _context.SaveChangesAsync();
+                await _userRepository.Insert(userDBO);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(userDBO);
@@ -101,11 +109,9 @@ namespace tatoulink.Controllers
 
             if (ModelState.IsValid)
             {
-                DataAccess.EfModels.User user = _mapper.Map<DataAccess.EfModels.User>(userDBO);
                 try
                 {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
+                    await _userRepository.Update(userDBO);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -150,13 +156,9 @@ namespace tatoulink.Controllers
             {
                 return Problem("Entity set 'AppDbContext.Users'  is null.");
             }
-            var user = await _context.Users.FindAsync(id);
-            if (user != null)
-            {
-                _context.Users.Remove(user);
-            }
-            
-            await _context.SaveChangesAsync();
+
+            await _userRepository.Delete(id);
+
             return RedirectToAction(nameof(Index));
         }
 

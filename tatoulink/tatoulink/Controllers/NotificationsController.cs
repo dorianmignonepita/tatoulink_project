@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using tatoulink.DataAccess.EfModels;
+using tatoulink.DataAccess.Repositories;
 
 namespace tatoulink.Controllers
 {
@@ -15,10 +16,18 @@ namespace tatoulink.Controllers
         private readonly DataAccess.EfModels.DbContext _context;
         protected readonly IMapper _mapper;
 
-        public NotificationsController(DataAccess.EfModels.DbContext context, IMapper mapper)
+        private readonly ILogger<NotificationRepository> _logger;
+
+        protected readonly NotificationRepository _notificationRepository;
+
+        public NotificationsController(DataAccess.EfModels.DbContext context, IMapper mapper, ILogger<NotificationRepository> logger)
         {
             _context = context;
             _mapper = mapper;
+
+            _logger = logger;
+
+            _notificationRepository = new NotificationRepository(_context, _logger, _mapper);
         }
 
         // GET: Notifications
@@ -67,9 +76,8 @@ namespace tatoulink.Controllers
         {
             if (ModelState.IsValid)
             {
-                DataAccess.EfModels.Notification notification = _mapper.Map<DataAccess.EfModels.Notification>(notificationDBO);
-                _context.Add(notification);
-                await _context.SaveChangesAsync();
+                await _notificationRepository.Insert(notificationDBO);
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["JobOfferUserId"] = new SelectList(_context.JobOfferUsers, "Id", "Id", notificationDBO.JobOfferUserId);
@@ -111,15 +119,13 @@ namespace tatoulink.Controllers
 
             if (ModelState.IsValid)
             {
-                DataAccess.EfModels.Notification notification = _mapper.Map<DataAccess.EfModels.Notification>(notificationDBO);
                 try
                 {
-                    _context.Update(notification);
-                    await _context.SaveChangesAsync();
+                    await _notificationRepository.Update(notificationDBO);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!NotificationExists(notification.Id))
+                    if (!NotificationExists(notificationDBO.Id))
                     {
                         return NotFound();
                     }
@@ -166,13 +172,9 @@ namespace tatoulink.Controllers
             {
                 return Problem("Entity set 'AppDbContext.Notifications'  is null.");
             }
-            var notification = await _context.Notifications.FindAsync(id);
-            if (notification != null)
-            {
-                _context.Notifications.Remove(notification);
-            }
-            
-            await _context.SaveChangesAsync();
+
+            await _notificationRepository.Delete(id);
+
             return RedirectToAction(nameof(Index));
         }
 
