@@ -12459,19 +12459,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dorim\\.nuget\\packages\\": {}
+    "C:\\Users\\guigu\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\tatoulink.csproj",
+      "projectUniqueName": "C:\\Users\\guigu\\OneDrive\\Bureau\\MTI\\C#\\Tatoulink\\tatoulink_project\\tatoulink\\tatoulink\\tatoulink.csproj",
       "projectName": "tatoulink",
-      "projectPath": "C:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\tatoulink.csproj",
-      "packagesPath": "C:\\Users\\dorim\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dorim\\Documents\\MTI_EPITA\\environnement_dotnet_c#\\tatoulink_project\\tatoulink\\tatoulink\\obj\\",
+      "projectPath": "C:\\Users\\guigu\\OneDrive\\Bureau\\MTI\\C#\\Tatoulink\\tatoulink_project\\tatoulink\\tatoulink\\tatoulink.csproj",
+      "packagesPath": "C:\\Users\\guigu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\guigu\\OneDrive\\Bureau\\MTI\\C#\\Tatoulink\\tatoulink_project\\tatoulink\\tatoulink\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\dorim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\guigu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12479,6 +12484,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
