@@ -26,6 +26,18 @@ namespace tatoulink.Controllers
         // GET: JobOffers
         public async Task<IActionResult> Index()
         {
+            // REMOVE ALL THE OUTDATED OFFERS :
+            var allJobOffers = _context.JobOffers.ToList();
+
+            foreach (var jobOffer in allJobOffers)
+            {
+                if (jobOffer.ExpiringDate < DateTime.Now)
+                {
+                    _context.Remove(jobOffer);
+                }
+            }
+            _context.SaveChanges();
+
             var appDbContext = _context.JobOffers.Include(j => j.Creator);
             return View(await appDbContext.ToListAsync());
         }
@@ -52,6 +64,7 @@ namespace tatoulink.Controllers
         // GET: JobOffers/Create
         public IActionResult Create()
         {
+
             ViewData["CreatorId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
