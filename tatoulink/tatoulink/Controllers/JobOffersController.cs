@@ -26,6 +26,18 @@ namespace tatoulink.Controllers
         // GET: JobOffers
         public async Task<IActionResult> Index()
         {
+            // REMOVE ALL THE OUTDATED OFFERS :
+            var allJobOffers = _context.JobOffers.ToList();
+
+            foreach (var jobOffer in allJobOffers)
+            {
+                if (jobOffer.ExpiringDate < DateTime.Now)
+                {
+                    _context.Remove(jobOffer);
+                }
+            }
+            _context.SaveChanges();
+
             var appDbContext = _context.JobOffers.Include(j => j.Creator);
             return View(await appDbContext.ToListAsync());
         }
@@ -52,6 +64,7 @@ namespace tatoulink.Controllers
         // GET: JobOffers/Create
         public IActionResult Create()
         {
+
             ViewData["CreatorId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
@@ -66,7 +79,6 @@ namespace tatoulink.Controllers
 
             if (ModelState.IsValid)
             {
-                // TO CHANGE
                 JobOffer jobOffer = _mapper.Map<JobOffer>(jobOfferDTO);
                 _context.Add(jobOffer);
                 await _context.SaveChangesAsync();
@@ -100,15 +112,16 @@ namespace tatoulink.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OfferName,Description,CreationDate,Type,Duration,ExpiringDate,CreatorId")] JobOffer jobOffer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OfferName,Description,CreationDate,Type,Duration,ExpiringDate,CreatorId")] JobOfferDTO jobOfferDTO)
         {
-            if (id != jobOffer.Id)
+            if (id != jobOfferDTO.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                JobOffer jobOffer = _mapper.Map<JobOffer>(jobOfferDTO);
                 try
                 {
                     _context.Update(jobOffer);
@@ -127,8 +140,8 @@ namespace tatoulink.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CreatorId"] = new SelectList(_context.Users, "Id", "Id", jobOffer.CreatorId);
-            return View(jobOffer);
+            ViewData["CreatorId"] = new SelectList(_context.Users, "Id", "Id", jobOfferDTO.CreatorId);
+            return View(jobOfferDTO);
         }
 
         // GET: JobOffers/Delete/5
