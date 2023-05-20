@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Build.Framework;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using RequiredAttribute = System.ComponentModel.DataAnnotations.RequiredAttribute;
 
 namespace tatoulink.Views.Account
@@ -15,8 +16,9 @@ namespace tatoulink.Views.Account
         {
         }
 
-        public void OnPost() 
+        public void OnPost()
         {
+            Debugger.Break();
             if (!ModelState.IsValid) return;
         }
     }

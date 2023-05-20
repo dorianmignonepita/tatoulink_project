@@ -1,0 +1,57 @@
+﻿@page
+@model tatoulink.Pages.Account.RegisterModel
+@{
+}
+
+<div class="container border" style="padding:20px">
+    <form method="post">
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="form-group row">
+            <div class="col-1">
+                <label asp-for="registerInfos.Firstname"></label>
+            </div>
+            <div class="col-5 mb-4">
+                <input type="text" asp-for="registerInfos.Firstname" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-1">
+                <label asp-for="registerInfos.Surname"></label>
+            </div>
+            <div class="col-5 mb-4">
+                <input type="text" asp-for="registerInfos.Surname" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-1">
+                <label asp-for="registerInfos.Birthdate"></label>
+            </div>
+            <div class="col-5 mb-4">
+                <input type="text" asp-for="registerInfos.Birthdate" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-1">
+                <label asp-for="registerInfos.Email"></label>
+            </div>
+            <div class="col-5 mb-4">
+                <input type="text" asp-for="registerInfos.Email" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-1">
+                <label asp-for="registerInfos.Password"></label>
+            </div>
+            <div class="col-5">
+                <input type="password" asp-for="registerInfos.Password" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-1">
+                <input type="submit" class="btn btn-primary" value="Register" />
+            </div>
+            <div class="col-5">
+            </div>
+        </div>
+    </form>
+</div>
