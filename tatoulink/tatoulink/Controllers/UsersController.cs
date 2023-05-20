@@ -92,15 +92,16 @@ namespace tatoulink.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Firstname,Surname,Birthdate,Password,Email,Status,LastJobs")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Firstname,Surname,Birthdate,Password,Email,Status,LastJobs")] UserDTO userDTO)
         {
-            if (id != user.Id)
+            if (id != userDTO.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                User user = _mapper.Map<User>(userDTO);
                 try
                 {
                     _context.Update(user);
@@ -119,7 +120,7 @@ namespace tatoulink.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(userDTO);
         }
 
         // GET: Users/Delete/5

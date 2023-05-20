@@ -99,15 +99,16 @@ namespace tatoulink.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,JobOfferId,UserId")] JobOfferUser jobOfferUser)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,JobOfferId,UserId")] JobOfferUserDTO jobOfferUserDTO)
         {
-            if (id != jobOfferUser.Id)
+            if (id != jobOfferUserDTO.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                JobOfferUser jobOfferUser = _mapper.Map<JobOfferUser>(jobOfferUserDTO);
                 try
                 {
                     _context.Update(jobOfferUser);
@@ -126,9 +127,9 @@ namespace tatoulink.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["JobOfferId"] = new SelectList(_context.JobOffers, "Id", "Id", jobOfferUser.JobOfferId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", jobOfferUser.UserId);
-            return View(jobOfferUser);
+            ViewData["JobOfferId"] = new SelectList(_context.JobOffers, "Id", "Id", jobOfferUserDTO.JobOfferId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", jobOfferUserDTO.UserId);
+            return View(jobOfferUserDTO);
         }
 
         // GET: JobOfferUsers/Delete/5
