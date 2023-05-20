@@ -1,6 +1,6 @@
 ﻿using tatoulink.Dbo;
 
-namespace tatoulink.DTO
+namespace tatoulink.Dbo
 {
     public class JobOfferUser : IObjectWithId
     {

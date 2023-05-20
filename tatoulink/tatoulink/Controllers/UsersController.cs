@@ -13,10 +13,10 @@ namespace tatoulink.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly DataAccess.EfModels.DbContext _context;
         protected readonly IMapper _mapper;
 
-        public UsersController(AppDbContext context, IMapper mapper)
+        public UsersController(DataAccess.EfModels.DbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -27,7 +27,7 @@ namespace tatoulink.Controllers
         {
               return _context.Users != null ? 
                           View(await _context.Users.ToListAsync()) :
-                          Problem("Entity set 'AppDbContext.Users'  is null.");
+                          Problem("Entity set 'DbContext.Users'  is null.");
         }
 
         // GET: Users/Details/5
@@ -59,16 +59,16 @@ namespace tatoulink.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Firstname,Surname,Birthdate,Password,Email,Status,LastJobs")] UserDTO userDTO)
+        public async Task<IActionResult> Create([Bind("Id,Firstname,Surname,Birthdate,Password,Email,Status,LastJobs")] Dbo.User userDBO)
         {
             if (ModelState.IsValid)
             {
-                User user = _mapper.Map<User>(userDTO);
+                DataAccess.EfModels.User user = _mapper.Map<DataAccess.EfModels.User>(userDBO);
                 _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(userDTO);
+            return View(userDBO);
         }
 
         // GET: Users/Edit/5
@@ -92,16 +92,16 @@ namespace tatoulink.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Firstname,Surname,Birthdate,Password,Email,Status,LastJobs")] UserDTO userDTO)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Firstname,Surname,Birthdate,Password,Email,Status,LastJobs")] Dbo.User userDBO)
         {
-            if (id != userDTO.Id)
+            if (id != userDBO.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                User user = _mapper.Map<User>(userDTO);
+                DataAccess.EfModels.User user = _mapper.Map<DataAccess.EfModels.User>(userDBO);
                 try
                 {
                     _context.Update(user);
@@ -120,7 +120,7 @@ namespace tatoulink.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(userDTO);
+            return View(userDBO);
         }
 
         // GET: Users/Delete/5

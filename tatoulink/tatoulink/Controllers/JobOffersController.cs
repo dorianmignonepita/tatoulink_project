@@ -7,6 +7,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using tatoulink.DataAccess.Repositories;
 using tatoulink.Dbo;
 using tatoulink.Models;
 
@@ -14,13 +15,22 @@ namespace tatoulink.Controllers
 {
     public class JobOffersController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly DataAccess.EfModels.DbContext _context;
         protected readonly IMapper _mapper;
 
-        public JobOffersController(AppDbContext context, IMapper mapper)
+        private readonly ILogger<JobOfferRepository> _logger;
+
+        protected readonly JobOfferRepository _jobOfferRepository;
+        protected readonly UserRepository _userRepository;
+
+        public JobOffersController(DataAccess.EfModels.DbContext context, IMapper mapper, ILogger<JobOfferRepository> logger)
         {
             _context = context;
             _mapper = mapper;
+            _logger = logger;
+
+            _jobOfferRepository = new JobOfferRepository(_context, _logger, _mapper);
+            _userRepository = new UserRepository(_context, _logger, _mapper);
         }
 
         // GET: JobOffers
@@ -74,20 +84,20 @@ namespace tatoulink.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OfferName,Description,CreationDate,Type,Duration,ExpiringDate,CreatorId")] JobOfferDTO jobOfferDTO)
+        public async Task<IActionResult> Create([Bind("Id,OfferName,Description,CreationDate,Type,Duration,ExpiringDate,CreatorId")] Dbo.JobOffer jobOfferDBO)
         {
 
             if (ModelState.IsValid)
             {
-                JobOffer jobOffer = _mapper.Map<JobOffer>(jobOfferDTO);
+                DataAccess.EfModels.JobOffer jobOffer = _mapper.Map<DataAccess.EfModels.JobOffer>(jobOfferDBO);
                 _context.Add(jobOffer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
 
-            ViewData["CreatorId"] = new SelectList(_context.Users, "Id", "Id", jobOfferDTO.CreatorId);
-            return View(jobOfferDTO);
+            ViewData["CreatorId"] = new SelectList(_context.Users, "Id", "Id", jobOfferDBO.CreatorId);
+            return View(jobOfferDBO);
         }
 
         // GET: JobOffers/Edit/5
@@ -112,16 +122,16 @@ namespace tatoulink.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OfferName,Description,CreationDate,Type,Duration,ExpiringDate,CreatorId")] JobOfferDTO jobOfferDTO)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OfferName,Description,CreationDate,Type,Duration,ExpiringDate,CreatorId")] Dbo.JobOffer jobOfferDBO)
         {
-            if (id != jobOfferDTO.Id)
+            if (id != jobOfferDBO.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                JobOffer jobOffer = _mapper.Map<JobOffer>(jobOfferDTO);
+                DataAccess.EfModels.JobOffer jobOffer = _mapper.Map<DataAccess.EfModels.JobOffer>(jobOfferDBO);
                 try
                 {
                     _context.Update(jobOffer);
@@ -140,8 +150,8 @@ namespace tatoulink.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CreatorId"] = new SelectList(_context.Users, "Id", "Id", jobOfferDTO.CreatorId);
-            return View(jobOfferDTO);
+            ViewData["CreatorId"] = new SelectList(_context.Users, "Id", "Id", jobOfferDBO.CreatorId);
+            return View(jobOfferDBO);
         }
 
         // GET: JobOffers/Delete/5

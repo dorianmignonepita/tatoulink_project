@@ -6,17 +6,16 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using tatoulink.DTO;
-using tatoulink.Models;
+using tatoulink.DataAccess.EfModels;
 
 namespace tatoulink.Controllers
 {
     public class NotificationsController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly DataAccess.EfModels.DbContext _context;
         protected readonly IMapper _mapper;
 
-        public NotificationsController(AppDbContext context, IMapper mapper)
+        public NotificationsController(DataAccess.EfModels.DbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -64,19 +63,19 @@ namespace tatoulink.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SenderId,ReceiverId,JobOfferUserId,Message,Timestamp")] NotificationDTO notificationDTO)
+        public async Task<IActionResult> Create([Bind("Id,SenderId,ReceiverId,JobOfferUserId,Message,Timestamp")] Dbo.Notification notificationDBO)
         {
             if (ModelState.IsValid)
             {
-                Notification notification = _mapper.Map<Notification>(notificationDTO);
+                DataAccess.EfModels.Notification notification = _mapper.Map<DataAccess.EfModels.Notification>(notificationDBO);
                 _context.Add(notification);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["JobOfferUserId"] = new SelectList(_context.JobOfferUsers, "Id", "Id", notificationDTO.JobOfferUserId);
-            ViewData["ReceiverId"] = new SelectList(_context.Users, "Id", "Id", notificationDTO.ReceiverId);
-            ViewData["SenderId"] = new SelectList(_context.Users, "Id", "Id", notificationDTO.SenderId);
-            return View(notificationDTO);
+            ViewData["JobOfferUserId"] = new SelectList(_context.JobOfferUsers, "Id", "Id", notificationDBO.JobOfferUserId);
+            ViewData["ReceiverId"] = new SelectList(_context.Users, "Id", "Id", notificationDBO.ReceiverId);
+            ViewData["SenderId"] = new SelectList(_context.Users, "Id", "Id", notificationDBO.SenderId);
+            return View(notificationDBO);
         }
 
         // GET: Notifications/Edit/5
@@ -103,16 +102,16 @@ namespace tatoulink.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,SenderId,ReceiverId,JobOfferUserId,Message,Timestamp")] NotificationDTO notificationDTO)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,SenderId,ReceiverId,JobOfferUserId,Message,Timestamp")] Dbo.Notification notificationDBO)
         {
-            if (id != notificationDTO.Id)
+            if (id != notificationDBO.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                Notification notification = _mapper.Map<Notification>(notificationDTO);
+                DataAccess.EfModels.Notification notification = _mapper.Map<DataAccess.EfModels.Notification>(notificationDBO);
                 try
                 {
                     _context.Update(notification);
@@ -131,10 +130,10 @@ namespace tatoulink.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["JobOfferUserId"] = new SelectList(_context.JobOfferUsers, "Id", "Id", notificationDTO.JobOfferUserId);
-            ViewData["ReceiverId"] = new SelectList(_context.Users, "Id", "Id", notificationDTO.ReceiverId);
-            ViewData["SenderId"] = new SelectList(_context.Users, "Id", "Id", notificationDTO.SenderId);
-            return View(notificationDTO);
+            ViewData["JobOfferUserId"] = new SelectList(_context.JobOfferUsers, "Id", "Id", notificationDBO.JobOfferUserId);
+            ViewData["ReceiverId"] = new SelectList(_context.Users, "Id", "Id", notificationDBO.ReceiverId);
+            ViewData["SenderId"] = new SelectList(_context.Users, "Id", "Id", notificationDBO.SenderId);
+            return View(notificationDBO);
         }
 
         // GET: Notifications/Delete/5

@@ -1,4 +1,6 @@
-﻿namespace tatoulink.Dbo
+﻿using tatoulink.Dbo;
+
+namespace tatoulink.Dbo
 {
     public class Notification : IObjectWithId
     {
