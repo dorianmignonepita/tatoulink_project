@@ -131,7 +131,7 @@ namespace tatoulink.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!JobOfferExists(jobOffer.Id))
+                    if (!JobOfferExists(jobOfferDBO.Id))
                     {
                         return NotFound();
                     }

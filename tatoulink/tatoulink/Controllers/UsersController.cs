@@ -115,7 +115,7 @@ namespace tatoulink.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.Id))
+                    if (!UserExists(userDBO.Id))
                     {
                         return NotFound();
                     }
