@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using tatoulink.DTO;
 using tatoulink.Models;
 
 namespace tatoulink.Controllers
@@ -13,10 +15,12 @@ namespace tatoulink.Controllers
     public class JobOffersController : Controller
     {
         private readonly AppDbContext _context;
+        protected readonly IMapper _mapper;
 
-        public JobOffersController(AppDbContext context)
+        public JobOffersController(AppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: JobOffers
@@ -57,17 +61,21 @@ namespace tatoulink.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OfferName,Description,CreationDate,Type,Duration,ExpiringDate,CreatorId")] JobOffer jobOffer)
+        public async Task<IActionResult> Create([Bind("Id,OfferName,Description,CreationDate,Type,Duration,ExpiringDate,CreatorId")] JobOfferDTO jobOfferDTO)
         {
 
             if (ModelState.IsValid)
             {
+                // TO CHANGE
+                JobOffer jobOffer = _mapper.Map<JobOffer>(jobOfferDTO);
                 _context.Add(jobOffer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CreatorId"] = new SelectList(_context.Users, "Id", "Id", jobOffer.CreatorId);
-            return View(jobOffer);
+
+
+            ViewData["CreatorId"] = new SelectList(_context.Users, "Id", "Id", jobOfferDTO.CreatorId);
+            return View(jobOfferDTO);
         }
 
         // GET: JobOffers/Edit/5

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,10 +13,12 @@ namespace tatoulink.Controllers
     public class NotificationsController : Controller
     {
         private readonly AppDbContext _context;
+        protected readonly IMapper _mapper;
 
-        public NotificationsController(AppDbContext context)
+        public NotificationsController(AppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: Notifications

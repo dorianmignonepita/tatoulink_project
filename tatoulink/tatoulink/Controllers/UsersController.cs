@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using tatoulink.DTO;
 using tatoulink.Models;
 
 namespace tatoulink.Controllers
@@ -12,10 +14,12 @@ namespace tatoulink.Controllers
     public class UsersController : Controller
     {
         private readonly AppDbContext _context;
+        protected readonly IMapper _mapper;
 
-        public UsersController(AppDbContext context)
+        public UsersController(AppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: Users
@@ -55,15 +59,16 @@ namespace tatoulink.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Firstname,Surname,Birthdate,Password,Email,Status,LastJobs")] User user)
+        public async Task<IActionResult> Create([Bind("Id,Firstname,Surname,Birthdate,Password,Email,Status,LastJobs")] UserDTO userDTO)
         {
             if (ModelState.IsValid)
             {
+                User user = _mapper.Map<User>(userDTO);
                 _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(userDTO);
         }
 
         // GET: Users/Edit/5
