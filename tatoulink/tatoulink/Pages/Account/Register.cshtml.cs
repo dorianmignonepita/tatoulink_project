@@ -15,7 +15,7 @@ namespace tatoulink.Pages.Account
 
         public void OnPost()
         {
-            Debugger.Break();
+            return;
         }
 
         public class RegisterInfos

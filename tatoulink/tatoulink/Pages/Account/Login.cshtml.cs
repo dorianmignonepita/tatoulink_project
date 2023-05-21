@@ -18,8 +18,7 @@ namespace tatoulink.Views.Account
 
         public void OnPost()
         {
-            Debugger.Break();
-            if (!ModelState.IsValid) return;
+            return;
         }
     }
 
