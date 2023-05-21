@@ -100,7 +100,7 @@ namespace tatoulink.service
             await _notificationRepository.Insert(notificationPostulant);
         }
 
-        public async Task<IEnumerable<Dbo.Notification>> getNotificationOfUser(int UserId)
+        public async Task<IEnumerable<Dbo.Notification>> GetNotificationOfUser(int UserId)
         {
             var list = await _notificationRepository.Get();
             return list.Where(notification => notification.ReceiverId == UserId);
@@ -117,7 +117,7 @@ namespace tatoulink.service
         public async Task DeleteJobOffer(Dbo.JobOffer jobOffer)
         {
             var list = await GetNotificationOfJobOffer(jobOffer.Id);
-            list.Select(async notification => {
+            var nothing = list.Select(async notification => {
                 var notificationPostulant = new Dbo.Notification
                 {
                     SenderId = notification.SenderId,

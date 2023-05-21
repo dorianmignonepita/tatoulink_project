@@ -89,9 +89,9 @@ namespace tatoulink.DataAccess
 
         }
 
-        public virtual async Task<bool> Delete(long idEntity)
+        public virtual async Task<bool> Delete(int idEntity)
         {
-            DBEntity dbEntity = _set.Find(idEntity);
+            DBEntity dbEntity = await _set.FindAsync(idEntity);
 
 
             if (dbEntity == null)
