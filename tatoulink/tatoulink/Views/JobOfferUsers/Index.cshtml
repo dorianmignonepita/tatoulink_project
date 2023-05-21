@@ -1,49 +1,74 @@
 ﻿@model IEnumerable<tatoulink.DataAccess.EfModels.JobOfferUser>
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Job Offers User";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.JobOffer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+<a class="btn btn-primary" asp-action="Create">Create New Job Offer User</a>
+
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.JobOffer.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+    <div class="job-offer-box">
+        <h2>@item.JobOffer.OfferName</h2>
+            <p>@item.JobOffer.Description</p>
+        <ul>
+            <li>Creation Date: @item.JobOffer.CreationDate</li>
+            <li>Type: @item.JobOffer.Type</li>
+            <li>Duration: @item.JobOffer.Duration</li>
+            <li>Expiring Date: @item.JobOffer.ExpiringDate</li>
+            <li>Creator: @item.JobOffer.Creator.Id</li>
+            <li>User email: @item.User.Email</li>
+            <li></li>
+        </ul>
+        <div class="job-offer-actions">
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+        </div>
+    </div>
 }
-    </tbody>
-</table>
-</body>
-</html>
+
+            <style>
+                .job-offers-container {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                }
+
+                .job-offer-box {
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    padding: 10px;
+                    margin: 10px;
+                    max-width: 400px;
+                    width: 100%;
+                }
+
+                    .job-offer-box h2 {
+                        font-size: 24px;
+                        margin-top: 0;
+                    }
+
+                    .job-offer-box p {
+                        margin-bottom: 10px;
+                    }
+
+                    .job-offer-box ul {
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+                    }
+
+                    .job-offer-box li {
+                        margin-bottom: 5px;
+                    }
+
+                .job-offer-actions {
+                    display: flex;
+                    justify-content: flex-end;
+                }
+
+                    .job-offer-actions a {
+                        margin-left: 10px;
+                    }
+            </style>
