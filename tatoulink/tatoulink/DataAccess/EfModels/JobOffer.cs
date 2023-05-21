@@ -28,7 +28,7 @@ public partial class JobOffer
     [Required(ErrorMessage = "Le champ CreatorId est requis.")]
     public int CreatorId { get; set; }
 
-    public virtual User Creator { get; set; } = null!;
+    public virtual AspNetUsers Creator { get; set; } = null!;
 
     public virtual ICollection<JobOfferUser> JobOfferUsers { get; set; } = new List<JobOfferUser>();
 }
