@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +7,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using tatoulink.DataAccess.EfModels;
 using tatoulink.DataAccess.Repositories;
 
 namespace tatoulink.Controllers
@@ -32,8 +30,9 @@ namespace tatoulink.Controllers
         }
 
         // GET: JobOffers
-        public async Task<IActionResult> Index(int? id)
+        public async Task<IActionResult> Index()
         {
+            // REMOVE ALL THE OUTDATED OFFERS :
             var allJobOffers = _context.JobOffers.ToList();
 
             foreach (var jobOffer in allJobOffers)
@@ -44,8 +43,7 @@ namespace tatoulink.Controllers
                 }
             }
 
-            var appDbContext = id == null ? _context.JobOffers.Include(j => j.Creator): _context.JobOffers.Include(j => j.Creator).Where(j => j.CreatorId == id);
-
+            var appDbContext = _context.JobOffers.Include(j => j.Creator);
             return View(await appDbContext.ToListAsync());
         }
 
@@ -181,63 +179,6 @@ namespace tatoulink.Controllers
             
             return RedirectToAction(nameof(Index));
         }
-
-        // GET: JobOffers/Apply/5
-        public async Task<IActionResult> Apply(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var jobOfferUser = _jobOfferRepository.Get().Result.Where(x => x.Id == id).FirstOrDefault();
-
-            if (jobOfferUser == null)
-            {
-                return NotFound();
-            }
-
-            return View(jobOfferUser);
-        }
-
-        // POST: JobOffers/Apply/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [BindProperty]
-        private string Email { get; set; }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Apply(int id, string email)
-        {
-            Console.WriteLine(email);
-            /*if (id != jobOfferDBO.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    await _jobOfferRepository.Update(jobOfferDBO);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!JobOfferExists(jobOfferDBO.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CreatorId"] = new SelectList(_context.Users, "Id", "Id", jobOfferDBO.CreatorId);*/
-            return View();
-        }
-
 
         private bool JobOfferExists(int id)
         {
