@@ -67,4 +67,7 @@
     <Build Include="dbo\Tables\job_offer_user.sql" />
     <Build Include="dbo\Tables\notification.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment.sql" />
+  </ItemGroup>
 </Project>

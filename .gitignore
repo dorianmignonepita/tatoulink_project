@@ -2,4 +2,5 @@
 .vscode
 obj/
 bin/
-appsettings.json
+Database/Database.dbmdl
+Database/Database.jfm
