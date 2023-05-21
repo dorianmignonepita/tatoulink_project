@@ -24,19 +24,9 @@ namespace tatoulink.Views.Account
         {
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public void OnPost()
         {
-            if (ModelState.IsValid)
-            {
-                var result = await _signInManager.PasswordSignInAsync(Credential.UserName, Credential.Password, false, false);
-                if (result != null && result.Succeeded)
-                {
-                    return RedirectToPage("Index");
-                }
-                ViewData["LoginError"] = "Email ou Mot de passe incorrect";
-            }
-
-            return Page();
+            return;
         }
     }
 

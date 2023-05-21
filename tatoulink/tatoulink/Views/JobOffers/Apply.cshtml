@@ -1,0 +1,40 @@
+﻿@model tatoulink.DataAccess.EfModels.JobOffer
+
+@{
+    ViewData["Title"] = "Apply";
+}
+
+<h1>Apply</h1>
+
+<div>
+    <h4>JobOffer</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OfferName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OfferName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Apply">
+            <div class="form-group">
+            </div>
+            <input name="email" value="Email" />
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Apply" asp-route-id="@Model?.Id">Apply</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

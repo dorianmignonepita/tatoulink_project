@@ -26,41 +26,9 @@ namespace tatoulink.Pages.Account
         {
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public void OnPost()
         {
-            if (ModelState.IsValid)
-            {
-                var user = new IdentityUser()
-                {
-                    UserName = registerInfos.UserName,
-                    PasswordHash = registerInfos.Password
-                };
-                var result = await _userManager.CreateAsync(user, registerInfos.Password);
-
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, false);
-                    return RedirectToPage("Index");
-                }
-
-                foreach (IdentityError error in result.Errors)
-                {
-                    if (error.Code == "DuplicateUserName")
-                    {
-                        ViewData["Pseudo"] = "Ce pseudo existe déjà";
-                    }
-                    else if (error.Code == "DuplicateEmail")
-                    {
-                        ViewData["Email"] = "Cet email existe déjà";
-                    }
-                    else if (error.Code.StartsWith("Password"))
-                    {
-                        ViewData["Password"] = "Requis : minimum de caractères et alphanumérics";
-                    }
-                    ModelState.AddModelError("", error.Description);
-                }
-            }
-            return Page();
+            return;
         }
 
         public class RegisterInfos
