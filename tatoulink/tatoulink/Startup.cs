@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using AutoMapper;
-using tatoulink.DataAccess.EfModels;
+﻿
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using System;
+using tatoulink.Account;
 
 namespace tatoulink
 {
@@ -21,8 +19,10 @@ namespace tatoulink
         {
             // Configuration des services nécessaires à votre application
             services.AddControllersWithViews();
-            services.AddDbContext<DbContext>();
-            services.AddAutoMapper(typeof(DataAccess.AutomapperProfiles));
+            // services.AddAutoMapper(typeof(DataAccess.AutomapperProfiles));
+
+            services.AddDbContext<AuthDbContext>(options => options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AuthDbContext>();
 
             // Configuration de la prise en charge des vues
             services.AddRazorPages();
@@ -45,6 +45,8 @@ namespace tatoulink
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

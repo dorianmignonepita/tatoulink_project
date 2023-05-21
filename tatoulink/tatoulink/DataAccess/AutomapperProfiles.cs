@@ -15,8 +15,8 @@ namespace tatoulink.DataAccess
             CreateMap<Dbo.Notification, EfModels.Notification>();
             CreateMap<EfModels.Notification, Dbo.Notification>();
 
-            CreateMap<Dbo.User, EfModels.User>();
-            CreateMap<EfModels.User, Dbo.User>();
+            CreateMap<Dbo.AspNetUsers, EfModels.AspNetUsers>();
+            CreateMap<EfModels.AspNetUsers, Dbo.AspNetUsers>();
         }
     }
 }

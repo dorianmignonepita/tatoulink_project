@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using tatoulink.Dbo;
 
 namespace tatoulink.DataAccess.EfModels;
 
-public partial class DbContext : Microsoft.EntityFrameworkCore.DbContext
+public partial class DbContext : IdentityDbContext
 {
     public DbContext()
     {
@@ -21,7 +23,8 @@ public partial class DbContext : Microsoft.EntityFrameworkCore.DbContext
 
     public virtual DbSet<Notification> Notifications { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -29,6 +32,8 @@ public partial class DbContext : Microsoft.EntityFrameworkCore.DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
         modelBuilder.Entity<JobOffer>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__job_offe__3213E83F06F62932");
@@ -56,11 +61,6 @@ public partial class DbContext : Microsoft.EntityFrameworkCore.DbContext
                 .IsUnicode(false)
                 .HasColumnName("offer_name");
             entity.Property(e => e.Type).HasColumnName("type");
-
-            entity.HasOne(d => d.Creator).WithMany(p => p.JobOffers)
-                .HasForeignKey(d => d.CreatorId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__job_offer__creat__2E1BDC42");
         });
 
         modelBuilder.Entity<JobOfferUser>(entity =>
@@ -76,10 +76,6 @@ public partial class DbContext : Microsoft.EntityFrameworkCore.DbContext
             entity.HasOne(d => d.JobOffer).WithMany(p => p.JobOfferUsers)
                 .HasForeignKey(d => d.JobOfferId)
                 .HasConstraintName("FK__job_offer__job_o__2F10007B");
-
-            entity.HasOne(d => d.User).WithMany(p => p.JobOfferUsers)
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__job_offer__user___300424B4");
         });
 
         modelBuilder.Entity<Notification>(entity =>
@@ -104,50 +100,11 @@ public partial class DbContext : Microsoft.EntityFrameworkCore.DbContext
                 .HasForeignKey(d => d.JobOfferUserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__notificat__job_o__2D27B809");
-
-            entity.HasOne(d => d.Receiver).WithMany(p => p.NotificationReceivers)
-                .HasForeignKey(d => d.ReceiverId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__notificat__recei__2C3393D0");
-
-            entity.HasOne(d => d.Sender).WithMany(p => p.NotificationSenders)
-                .HasForeignKey(d => d.SenderId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__notificat__sende__2B3F6F97");
         });
 
-        modelBuilder.Entity<User>(entity =>
+        modelBuilder.Entity<AspNetUsers>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__user__3213E83F7BA1E321");
-
-            entity.ToTable("user");
-
-            entity.HasIndex(e => e.Email, "UQ__user__AB6E616430615130").IsUnique();
-
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Birthdate)
-                .HasColumnType("datetime")
-                .HasColumnName("birthdate");
-            entity.Property(e => e.Email)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("email");
-            entity.Property(e => e.Firstname)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("firstname");
-            entity.Property(e => e.LastJobs)
-                .IsUnicode(false)
-                .HasColumnName("last_jobs");
-            entity.Property(e => e.Password)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("password");
-            entity.Property(e => e.Status).HasColumnName("status");
-            entity.Property(e => e.Surname)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("surname");
+            entity.Property(e => e.UserName).HasColumnName("UserName");
         });
 
         OnModelCreatingPartial(modelBuilder);

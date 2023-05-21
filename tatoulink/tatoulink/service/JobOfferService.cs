@@ -11,10 +11,10 @@ namespace tatoulink.service
     {
         private readonly IJobOfferUserRepository _jobOfferUserRepository;
         private readonly IJobOfferRepository _jobOfferRepository;
-        private readonly IUserRepository _userRepository;
+        private readonly IAspNetUsersRepository _userRepository;
         private INotificationRepository _notificationRepository;
 
-        public JobOfferService(IJobOfferRepository jobOfferRepository, IJobOfferUserRepository jobOfferUserRepository, IUserRepository userRepository, INotificationRepository notificationRepository)
+        public JobOfferService(IJobOfferRepository jobOfferRepository, IJobOfferUserRepository jobOfferUserRepository, IAspNetUsersRepository userRepository, INotificationRepository notificationRepository)
         {
             _jobOfferRepository = jobOfferRepository;
             _userRepository = userRepository;
@@ -26,7 +26,7 @@ namespace tatoulink.service
             return await _jobOfferRepository.Get();
         }
 
-        public async Task<IEnumerable<Dbo.User>> GetAllUser()
+        public async Task<IEnumerable<Dbo.AspNetUsers>> GetAllUser()
         {
             return await _userRepository.Get();
         }
@@ -36,13 +36,13 @@ namespace tatoulink.service
             return await _jobOfferUserRepository.Get();
         }
 
-        public async Task<IEnumerable<int?>> GetAllPostulant(int JobOfferId)
+        public async Task<IEnumerable<string?>> GetAllPostulant(int JobOfferId)
         {
             var list = await _jobOfferUserRepository.Get();
             return list.Where(jobOfferUser => jobOfferUser.JobOfferId ==  JobOfferId).Select(JobOffer => JobOffer.UserId); 
         }
 
-        public async Task<IEnumerable<int?>> GetAllJobOfferPostulated(int userId)
+        public async Task<IEnumerable<int?>> GetAllJobOfferPostulated(string userId)
         {
             var list = await _jobOfferUserRepository.Get();
             return list.Where(jobOfferUser => jobOfferUser.UserId == userId).Select(jobOffer => jobOffer.JobOfferId);
@@ -53,7 +53,7 @@ namespace tatoulink.service
             return list.Where(JobOffer => JobOffer.Id == id).First();
         }
 
-        public async Task<Dbo.User> GetUser(int id)
+        public async Task<Dbo.AspNetUsers> GetUser(string id)
         {
             var list = await _userRepository.Get();
             return list.Where(user => user.Id == id).First();
@@ -70,7 +70,7 @@ namespace tatoulink.service
             await _notificationRepository.Insert(notification);
         }
 
-        public async Task ApplyToJobOffer(Dbo.JobOffer jobOffer, Dbo.User user)
+        public async Task ApplyToJobOffer(Dbo.JobOffer jobOffer, Dbo.AspNetUsers user)
         {
             var jobOfferUser = new Dbo.JobOfferUser
             {
@@ -100,7 +100,7 @@ namespace tatoulink.service
             await _notificationRepository.Insert(notificationPostulant);
         }
 
-        public async Task<IEnumerable<Dbo.Notification>> GetNotificationOfUser(int UserId)
+        public async Task<IEnumerable<Dbo.Notification>> GetNotificationOfUser(string UserId)
         {
             var list = await _notificationRepository.Get();
             return list.Where(notification => notification.ReceiverId == UserId);

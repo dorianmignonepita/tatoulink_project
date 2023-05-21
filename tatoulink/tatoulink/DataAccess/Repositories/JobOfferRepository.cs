@@ -5,7 +5,7 @@ namespace tatoulink.DataAccess.Repositories
 {
     public class JobOfferRepository : Repository<EfModels.JobOffer, Dbo.JobOffer>, Interfaces.IJobOfferRepository
     {
-        public JobOfferRepository(DbContext context, ILogger logger, IMapper mapper) : base(context, logger, mapper)
+        public JobOfferRepository(EfModels.DbContext context, ILogger logger, IMapper mapper) : base(context, logger, mapper)
         {
         }
     }

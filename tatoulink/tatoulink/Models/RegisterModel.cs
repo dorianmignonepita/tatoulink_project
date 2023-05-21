@@ -1,11 +1,7 @@
-﻿using tatoulink.Dbo;
-
-namespace tatoulink.Dbo
+﻿namespace tatoulink.Models
 {
-    public class User : IObjectWithId
+    public class RegisterModel
     {
-        public int Id { get; set; }
-
         public string Firstname { get; set; }
 
         public string Surname { get; set; }
@@ -15,9 +11,5 @@ namespace tatoulink.Dbo
         public string Password { get; set; }
 
         public string Email { get; set; }
-
-        public int Status { get; set; }
-
-        public string LastJobs { get; set; }
     }
 }

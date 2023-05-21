@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
@@ -9,6 +10,18 @@ namespace tatoulink.Pages.Account
     {
         [BindProperty]
         public RegisterInfos registerInfos { get; set; }
+
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+
+
+        public RegisterModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+        }
+
+
         public void OnGet()
         {
         }
@@ -21,16 +34,9 @@ namespace tatoulink.Pages.Account
         public class RegisterInfos
         {
             [Required]
-            public string Email { get; set; }
-            [Required]
-            [DataType(DataType.Password)]
             public string Password { get; set; }
             [Required]
-            public string Firstname { get; set; }
-            [Required]
-            public string Surname { get; set; }
-            [Required]
-            public string Birthdate { get; set; }
+            public string UserName { get; set; }
         }
     }
 }
