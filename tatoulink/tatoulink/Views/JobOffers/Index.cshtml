@@ -1,71 +1,117 @@
 ﻿@model IEnumerable<tatoulink.DataAccess.EfModels.JobOffer>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Job Offers";
 }
 
-<h1>Index</h1>
+<h1>Job Offers</h1>
+
+<a class="btn btn-primary" asp-action="Create">Create New Job Offer</a>
+
+<div class="job-offers-container">
+    @foreach (var item in Model)
+    {
+        <div class="job-offer-box">
+            <h2>@item.OfferName</h2>
+            <p>@item.Description</p>
+            <ul>
+                <li>Creation Date: @item.CreationDate</li>
+                <li>Type: @item.Type</li>
+                <li>Duration: @item.Duration</li>
+                <li>Expiring Date: @item.ExpiringDate</li>
+                <li>Creator: @item.Creator.Id</li>
+            </ul>
+            <div class="job-offer-actions">
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .job-offers-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .job-offer-box {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px;
+        max-width: 400px;
+        width: 100%;
+    }
+
+    .job-offer-box h2 {
+        font-size: 24px;
+        margin-top: 0;
+    }
+
+    .job-offer-box p {
+        margin-bottom: 10px;
+    }
+
+    .job-offer-box ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .job-offer-box li {
+        margin-bottom: 5px;
+    }
+
+    .job-offer-actions {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .job-offer-actions a {
+        margin-left: 10px;
+    }
+</style>
+
+
+@*<h1>Job Offers</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-action="Create">Create New Job Offer</a>
 </p>
-<table class="table">
+
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.OfferName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Duration)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ExpiringDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Creator)
-            </th>
+            <th>Offer Name</th>
+            <th>Description</th>
+            <th>Creation Date</th>
+            <th>Type</th>
+            <th>Duration</th>
+            <th>Expiring Date</th>
+            <th>Creator</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OfferName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Duration)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExpiringDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Creator.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.OfferName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>@Html.DisplayFor(modelItem => item.CreationDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.Type)</td>
+                <td>@Html.DisplayFor(modelItem => item.Duration)</td>
+                <td>@Html.DisplayFor(modelItem => item.ExpiringDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.Creator.Id)</td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
-</table>
+</table>*@

@@ -1,0 +1,42 @@
+﻿@page
+@using tatoulink.DataAccess.EfModels
+@using Microsoft.EntityFrameworkCore
+@inject tatoulink.DataAccess.EfModels.DbContext dbContext
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4 mb-5 welcome-text">Votre espace personnel</h1>
+            <h2 class="display-6 mb-4">Consultez vos notifications, offres et annonces.</h2>
+            <a href="https://localhost:7190/account/login" class="btn btn-primary">Mes Notifications</a>
+            <a href="https://localhost:7190/account/login" class="btn btn-primary">Mes Offres</a>
+            <a href="https://localhost:7190/account/register" class="btn btn-primary">Mes Annonces</a>
+        </div>
+        <div class="col-md-6 text-right">
+            <img src="images/TeamCollaborationUndraw.png" style="max-width: 100%;" />
+        </div>
+    </div>
+</div>
+
+        <div class="container mt-5">
+            <h2>Offres d'emploi disponibles</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Description</th>
+                        <th>Date de publication</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var offre in dbContext.JobOffers)
+                    {
+                        <tr>
+                            <td>@offre.OfferName</td>
+                            <td>@offre.Description</td>
+                            <td>@offre.CreationDate.ToShortDateString()</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
