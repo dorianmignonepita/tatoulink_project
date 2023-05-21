@@ -18,6 +18,6 @@ namespace tatoulink.Dbo
 
         public DateTime ExpiringDate { get; set; }
 
-        public string CreatorId { get; set; }
+        public int CreatorId { get; set; }
     }
 }

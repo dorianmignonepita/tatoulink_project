@@ -15,5 +15,5 @@ public partial class JobOfferUser
 
     public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
 
-    public virtual AspNetUsers? User { get; set; }
+    public virtual User? User { get; set; }
 }

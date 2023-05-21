@@ -25,6 +25,7 @@
                 <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                 <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a>
                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a href="/JobOfferUsers/CreateFromJobOffer?offerId=@item.Id" class="btn btn-primary">Apply</a>
             </div>
         </div>
     }

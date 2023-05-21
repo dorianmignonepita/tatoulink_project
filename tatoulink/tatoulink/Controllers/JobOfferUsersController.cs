@@ -32,10 +32,16 @@ namespace tatoulink.Controllers
         }
 
         // GET: JobOfferUsers
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
-            var appDbContext = _context.JobOfferUsers.Include(j => j.JobOffer).Include(j => j.User);
-            return View(await appDbContext.ToListAsync());
+            if (id == null)
+            {
+                var appDbContext = _context.JobOfferUsers.Include(j => j.JobOffer).Include(j => j.User);
+                return View(await appDbContext.ToListAsync());
+            }
+
+            var ListOffer = _context.JobOfferUsers.Include(j => j.JobOffer).Include(j => j.User).Where(j => j.UserId == id);
+            return View(await ListOffer.ToListAsync());
         }
 
         // GET: JobOfferUsers/Details/5
@@ -60,8 +66,16 @@ namespace tatoulink.Controllers
 
         // GET: JobOfferUsers/Create
         public IActionResult Create()
+         {
+             ViewData["JobOfferId"] = new SelectList(_context.JobOffers, "Id", "Id");
+             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+             return View();
+         }
+
+        // GET: JobOfferUsers/CreateFromJobOffer
+        public IActionResult CreateFromJobOffer(int offerId)
         {
-            ViewData["JobOfferId"] = new SelectList(_context.JobOffers, "Id", "Id");
+            ViewData["JobOfferId"] = new SelectList(_context.JobOffers, "Id", "Id", offerId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
